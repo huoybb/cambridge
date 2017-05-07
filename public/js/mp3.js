@@ -3,6 +3,8 @@
   $(function() {
     $('.mp3').click(function() {
       var mp3player;
+      $('tr.info').removeClass('info');
+      $(this).parents('tr').addClass('info');
       mp3player = $('.mp3player');
       mp3player.attr('src', $(this).attr('data'));
       mp3player[0].play();
@@ -11,9 +13,9 @@
     return $('.mp3player').on('ended', function() {
       var next;
       next = parseInt($(this).attr('chapter')) + 1;
-      $('.mp3').filter(function() {
+      $('tr').filter(function() {
         return parseInt($(this).parents('tr').attr('chapter')) === next;
-      }).click();
+      }).filter('.mp3').click();
       return $(this).attr('chapter', next);
     });
   });
