@@ -1,0 +1,19 @@
+{
+    "require": {
+        "nesbot/carbon": "^1.22",
+        "illuminate/support": "^5.4",
+        "symfony/console": "^3.2",
+        "robmorgan/phinx": "^0.7.1",
+        "guzzlehttp/guzzle": "^6.2",
+        "fabpot/goutte": "^3.1",
+        "phalcon/ide-stubs": "^3.1",
+        "snowair/phalcon-debugbar": "^1.2"
+    },
+    "autoload": {
+        "files": ["app/config/helper.php"],
+        "psr-4": {
+            "core\\":"core/",
+            "webParser\\": "app/webParser/"
+        }
+    }
+}

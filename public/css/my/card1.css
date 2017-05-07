@@ -1,0 +1,58 @@
+.thumbnail {
+  width: 220px;
+}
+.Card {
+  position: relative;
+  float: left;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  display: block;
+}
+.Card img {
+  width: 220px;
+}
+.Card__index {
+  color: #fff;
+  background: #99c93d;
+  border-top-left-radius: 25px 55px;
+  border-top-right-radius: 25px 55px;
+  border-bottom-right-radius: 25px 55px;
+  border-bottom-left-radius: 25px 55px;
+  width: 80px;
+  height: 30px;
+  display: block;
+  text-align: center;
+  line-height: 30px;
+  position: absolute;
+  margin-top: -13px;
+  margin-left: 60px;
+  padding: 5px 11px;
+  font-weight: 100;
+  font-size: 14px;
+  overflow: hidden;
+}
+.Card__title {
+  width: 180px;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  -webkit-box-flex: 1;
+}
+.Card__count {
+  width: 30px;
+  font-weight: 600;
+  text-align: right;
+  font-size: 22px;
+  padding-left: 10px;
+}
+.Card__details {
+  width: 220px;
+  background: #fff;
+  padding: 8px 12px;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  overflow: hidden;
+}

@@ -1,0 +1,37 @@
+.Heading--Fancy {
+  margin-top: 0;
+  color: #3c3e42;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 35px;
+}
+.Heading--Fancy {
+  text-align: center;
+}
+.Heading--Fancy, .Heading--Fancy span {
+  position: relative;
+}
+.Heading--Fancy span:before {
+  right: 100%;
+  margin-right: 40px;
+}
+.Heading--Fancy span:after {
+  left: 100%;
+  margin-left: 40px;
+}
+.Heading--Fancy{
+  overflow: hidden;
+}
+.Heading--Fancy span:after, .Heading--Fancy span:before {
+  content: "";
+  position: absolute;
+  border-top: 3px solid #f68459;
+  width: 100px;
+  height: 3px;
+  top: 50%;
+  margin-top: -3px/2;
+}
+
+*, :after, :before {
+  box-sizing: border-box;
+}
