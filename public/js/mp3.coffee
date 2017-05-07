@@ -14,8 +14,8 @@ $ ->
 #    计算下一个播放mp3
     next = parseInt($(this).attr('chapter')) + 1
 #    查找目标tr，点击播放
-    $('tr').filter(
+    $('.mp3').filter(
       -> parseInt($(this).parents('tr').attr('chapter')) is next
-    ).filter('.mp3').click()
+    ).click()
 #    修改mp3player的状态，chapter，以便能够为下一个自动播放准备
     $(this).attr('chapter',next)

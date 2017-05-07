@@ -10,4 +10,5 @@ $router->addx('/','index::index','home');
 
 $router->addx('/lists/{list:[0-9]+}','lists::show');
 $router->addx('/books/{book:[0-9]+}','books::show');
+$router->addx('/chapters/{chapter:[0-9]+}','chapters::show');
 return $router;

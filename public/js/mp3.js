@@ -13,9 +13,9 @@
     return $('.mp3player').on('ended', function() {
       var next;
       next = parseInt($(this).attr('chapter')) + 1;
-      $('tr').filter(function() {
+      $('.mp3').filter(function() {
         return parseInt($(this).parents('tr').attr('chapter')) === next;
-      }).filter('.mp3').click();
+      }).click();
       return $(this).attr('chapter', next);
     });
   });

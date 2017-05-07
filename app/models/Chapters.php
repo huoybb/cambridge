@@ -2,6 +2,7 @@
 
 class Chapters extends \core\myModel
 {
+    use \core\myPresenterTrait;
 
     /**
      *
