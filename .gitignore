@@ -2,3 +2,6 @@
 /cache/
 /vendor/
 /.phalcon/
+/public/images/
+/public/files/
+/public/sounds/

@@ -82,6 +82,13 @@ class Books extends \core\myModel
      */
     public $updated_at;
 
+    public static function findByList(Lists $list)
+    {
+        return static::query()
+            ->where('list_id = :list:',['list'=>$list->id])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */
@@ -130,5 +137,22 @@ class Books extends \core\myModel
             $this->save();
         }
     }
+    public function chapters()
+    {
+        return Chapters::findByBook($this);
+    }
+    public function list()
+    {
+        return $this->make('list',function(){
+            return Lists::findFirst($this->list_id);
+        });
+    }
+
+    public function img()
+    {
+        return '/images/'.basename($this->img);
+    }
+
+
 
 }

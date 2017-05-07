@@ -6936,3 +6936,17 @@ pre {
   text-align: center;
   display: block;
 }
+.col-md-3 .span1 {
+  height: 30px;
+  line-height: 30px;
+  font-size: 18px;
+  font-family: 微软雅黑;
+  color: #020202;
+}
+.col-md-3 span {
+  display: block;
+  height: 36px;
+  line-height: 36px;
+  color: #6D6D6D;
+  font-size: 16px;
+}

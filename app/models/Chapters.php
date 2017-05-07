@@ -47,6 +47,13 @@ class Chapters extends \core\myModel
      */
     public $updated_at;
 
+    public static function findByBook(Books $book)
+    {
+        return static::query()
+            ->where('book_id = :book:',['book'=>$book->id])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */
@@ -98,6 +105,15 @@ class Chapters extends \core\myModel
         $cid = $this->index - 1;
         return "http://static2.iyuba.com/camstory/sound/{$levelid}_{$bid}_{$cid}.mp3";
     }
+    public function mp3()
+    {
+        $book = $this->book();
+        $levelid = $book->levelid;
+        $bid = $book->bid;
+        $cid = $this->index - 1;
+        return "/sounds/{$levelid}_{$bid}_{$cid}.mp3";
+    }
+
 
 
 }

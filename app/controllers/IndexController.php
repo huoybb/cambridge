@@ -5,6 +5,7 @@ class IndexController extends \core\myController
 
     public function indexAction()
     {
+
         $this->view->lists = Lists::find();
     }
 
@@ -39,6 +40,18 @@ class IndexController extends \core\myController
             sleep(random_int(1, 5));
         }
 
+    }
+
+    protected function getbookpostersAndstripAuthor()
+    {
+        foreach (Books::find() as $book) {
+            $image = file_get_contents($book->img);
+            $filename = 'images/' . basename($book->img);
+            file_put_contents($filename, $image);
+        }
+        foreach(Books::find() as $book){
+            $book->save(['author'=>trim(preg_replace('%\s*<img src="images/author\.png">%sim', '', $book->author))]);
+        }
     }
 
 }

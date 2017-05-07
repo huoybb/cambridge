@@ -95,6 +95,11 @@ class Lists extends \core\myModel
         $data['list_id'] = $this->id;
         return Books::saveNew($data);
     }
+    public function books()
+    {
+        return Books::findByList($this);
+    }
+
 
 
 }
