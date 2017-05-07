@@ -139,7 +139,9 @@ class Books extends \core\myModel
     }
     public function chapters()
     {
-        return Chapters::findByBook($this);
+        return $this->make('chapters',function(){
+            return Chapters::findByBook($this);
+        });
     }
     public function list()
     {

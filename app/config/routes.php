@@ -1,7 +1,6 @@
 <?php
 
 use core\myRouter;
-use middlewares\setUrlBeforeMiddleware;
 
 $router = new myRouter();
 $router->removeExtraSlashes(true);
