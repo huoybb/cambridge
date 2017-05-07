@@ -2,11 +2,12 @@
 (function() {
   $(function() {
     return $('.mp3player').on('ended', function() {
-      var next;
+      var link, next;
       next = parseInt($(this).attr('chapter')) + 1;
-      return $('tr a').filter(function() {
+      link = $('tr a').filter(function() {
         return parseInt($(this).parents('tr').attr('chapter')) === next;
-      }).click();
+      });
+      return window.location.href = link.attr('href');
     });
   });
 
