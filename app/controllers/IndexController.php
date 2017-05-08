@@ -5,7 +5,16 @@ class IndexController extends \core\myController
 
     public function indexAction()
     {
-
+//        foreach(Books::find() as $book){
+//            preg_match('%^<h3>作者简介</h3>\s*<h4>(.+?)</h4>\s*<p>(.+?)</p>\s+<h4>(.+?)</h4>\s*<p>(.+?)</p>$%sim', $book->author, $regs);
+//            $data=[
+//                'author'=>$regs[1],
+//                'author_intr'=>$regs[2],
+//                'translator'=>$regs[3],
+//                'translator_intr'=>$regs[4],
+//            ];
+//            $book->addAuthor($data);
+//        }
         $this->view->lists = Lists::find();
     }
 

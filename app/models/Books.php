@@ -3,6 +3,7 @@
 class Books extends \core\myModel
 {
     use CommentableTrait;
+    use \core\myPresenterTrait;
     /**
      *
      * @var integer
@@ -154,6 +155,53 @@ class Books extends \core\myModel
     {
         return '/images/'.basename($this->img);
     }
+
+    /**
+     * $data=[
+            'author'=>$regs[1],
+            'author_intr'=>$regs[2],
+            'translator'=>$regs[3],
+            'translator_intr'=>$regs[4],
+        ];
+     * @param $data
+     */
+    public function addAuthor($data)
+    {
+        Authors::findOrNew([
+            'name'=>$data['author'],
+            'intr'=>$data['author_intr'],
+            'notes'=>'作者',
+            'authorable'=>$this,
+        ]);
+        Authors::findOrNew([
+            'name'=>$data['translator'],
+            'intr'=>$data['translator_intr'],
+            'notes'=>'译者',
+            'authorable'=>$this,
+        ]);
+    }
+    public function authors()
+    {
+        return $this->make('authors',function(){
+            return Authors::findByBook($this);
+        });
+    }
+    public function author()
+    {
+        foreach($this->authors() as $author){
+            if($author->authorable->notes == '作者') return $author;
+        }
+        return null;
+    }
+    public function translator()
+    {
+        foreach($this->authors() as $author){
+            if($author->authorable->notes == '译者') return $author;
+        }
+        return null;
+    }
+
+
 
 
 
