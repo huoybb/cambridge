@@ -1,8 +1,11 @@
 <?php
 
-class Lists extends \core\myModel
+use Phalcon\Validation;
+use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
+
+class Users extends \core\myModel
 {
-    use CommentableTrait;
+    use \core\myPresenterTrait;
 
     /**
      *
@@ -15,17 +18,38 @@ class Lists extends \core\myModel
 
     /**
      *
-     * @var integer
-     * @Column(type="integer", length=11, nullable=false)
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
      */
-    public $index;
+    public $name;
 
     /**
      *
      * @var string
      * @Column(type="string", length=255, nullable=false)
      */
-    public $name;
+    public $password;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $email;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $remember_token;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=false)
+     */
+    public $notes;
 
     /**
      *
@@ -41,16 +65,23 @@ class Lists extends \core\myModel
      */
     public $updated_at;
 
-    /**
-     * @param $key
-     * @return \Phalcon\Mvc\ModelInterface | Lists
-     */
-    public static function findByIndex($key)
+    public static function IsUserExisted($email)
     {
-        return static::query()
-            ->where('index = :key:',['key'=>$key])
+        return is_null(static :: findByEmail($email));
+    }
+
+    /**
+     * @param $email
+     * @return Users
+     */
+    public static function findByEmail($email)
+    {
+        return static :: query()
+            ->where('email = :email:',['email'=>$email])
             ->execute()->getFirst();
     }
+
+
 
     /**
      * Initialize method for model.
@@ -67,14 +98,14 @@ class Lists extends \core\myModel
      */
     public function getSource()
     {
-        return 'lists';
+        return 'users';
     }
 
     /**
      * Allows to query a set of records that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Lists[]|Lists
+     * @return Users[]|Users
      */
     public static function find($parameters = null)
     {
@@ -85,22 +116,11 @@ class Lists extends \core\myModel
      * Allows to query the first record that match the specified conditions
      *
      * @param mixed $parameters
-     * @return Lists
+     * @return Users
      */
     public static function findFirst($parameters = null)
     {
         return parent::findFirst($parameters);
     }
-    public function addBook($data)
-    {
-        $data['list_id'] = $this->id;
-        return Books::saveNew($data);
-    }
-    public function books()
-    {
-        return Books::findByList($this);
-    }
-
-
 
 }

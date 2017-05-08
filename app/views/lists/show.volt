@@ -7,11 +7,21 @@
     <h1>系列：{{ list.name }} </h1>
 
     <h2>图书</h2>
+    <div class="row">
+        {% for book in list.books() %}
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ url(['for':'books.show','book':book.id]) }}" class="thumbnail">
+                <img src="{{ book.img() }}" alt="{{ book.name }}">
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
     <table class="table table-hover">
         <tr>
             <td>#</td>
             <td>名字</td>
-            <td>图片</td>
+            <td>链接</td>
         </tr>
         {% for book in list.books() %}
             <tr>
@@ -22,4 +32,5 @@
         {% endfor %}
     </table>
 
+    {% include 'layouts/commentList' with ['commentOwner':list] %}
 {% endblock %}

@@ -31,6 +31,10 @@ try {
     include APP_PATH . '/config/loader.php';
 
     /**
+     * 自动登录，带后续删除
+     */
+    auth()->loginByUserId(1);
+    /**
      * Handle the request
      */
     $application = new \Phalcon\Mvc\Application($di);

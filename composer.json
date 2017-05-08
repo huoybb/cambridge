@@ -13,7 +13,8 @@
         "files": ["app/config/helper.php"],
         "psr-4": {
             "core\\":"core/",
-            "webParser\\": "app/webParser/"
+            "webParser\\": "app/webParser/",
+            "middlewares\\": "app/middlewares/"
         }
     }
 }

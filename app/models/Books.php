@@ -2,7 +2,7 @@
 
 class Books extends \core\myModel
 {
-
+    use CommentableTrait;
     /**
      *
      * @var integer

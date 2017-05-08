@@ -1,0 +1,1 @@
+<input type="hidden" name="{{ security.getTokenKey() }}" value="{{ security.getToken() }}"/>
