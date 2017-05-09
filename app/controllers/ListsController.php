@@ -12,5 +12,14 @@ class ListsController extends \core\myController
     {
         $this->view->setVars(compact('list'));
     }
+    public function editAction(Lists $list)
+    {
+        if($this->request->isPost()){
+            $list->save($this->request->getPost());
+            return $this->redirectBack();
+        }
+        $this->view->setVars(compact('list'));
+    }
+
 
 }

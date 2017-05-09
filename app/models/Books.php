@@ -90,6 +90,14 @@ class Books extends \core\myModel
             ->execute();
     }
 
+    public static function findByAuthor(Authors $author)
+    {
+        return static::query()
+            ->leftJoin(Authorables::class,'au.authorable_type = "Books" AND au.authorable_id = Books.id','au')
+            ->where('au.author_id = :author:',['author'=>$author->id])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */

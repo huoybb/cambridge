@@ -3,14 +3,30 @@
 {% block content %}
     <ol class="breadcrumb"><li class="active">首页</li>
     </ol>
-    <h1>剑桥英语 </h1>
+    <h1>剑桥双语分级阅读</h1>
 
     <h2>系列</h2>
-    <ul class="list-group">
-        {% for list in lists %}
-            <li class="list-group-item"><a href="{{ url(['for':'lists.show','list':list.id]) }}">{{ list.name }}</a></li>
+
+    <table class="table table-hover">
+        <tr>
+            <td>#</td>
+            <td>级别</td>
+            <td>推荐年级（词汇量）</td>
+            <td>CEF</td>
+            <td>ESOL</td>
+            <td>操作</td>
+        </tr>
+        {% for level in lists %}
+            <tr>
+                <td>{{ level.index }}</td>
+                <td>{{ level.present('showLink') }}</td>
+                <td>{{ level.grade }}</td>
+                <td>{{ level.cef }}</td>
+                <td>{{ level.esol }}</td>
+                <td>{{ level.present('operations') }}</td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
     <h2>说明</h2>
     <ul class="list-unstyled">
         <li class="tit">
@@ -19,26 +35,7 @@
             <span class="span3">CEF</span>
             <span class="span4">ESOL</span>
         </li>
-        <li class="li1"><span class="span1">入门级</span>
-            <span class="span2">小学高年级、初一年级(250)</span>
-        </li>
-        <li>
-            <span class="span1">第1级</span>
-            <span class="span2">初一、初二年级(400)</span>
-            <span class="span3">A1</span>
-        </li>
-        <li>
-            <span class="span1">第2级</span>
-            <span class="span2">初二、初三年级(800)</span>
-            <span class="span3">A2</span>
-            <span class="span4">KET</span>
-        </li>
-        <li>
-            <span class="span1">第3级</span>
-            <span class="span2">初三、高一年级(1,300)</span>
-            <span class="span3">B1</span>
-            <span class="span4">PET</span>
-        </li>
+
         <li>
             <span class="span1">第4级</span>
             <span class="span2">高一、高二年级(1,900)</span>

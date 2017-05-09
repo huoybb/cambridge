@@ -2,6 +2,8 @@
 
 class Authors extends \core\myModel
 {
+    use \core\myPresenterTrait;
+    use CommentableTrait;
 
     /**
      *
@@ -116,5 +118,18 @@ class Authors extends \core\myModel
     {
         return parent::findFirst($parameters);
     }
+
+    public function books()
+    {
+        return Books::findByAuthor($this);
+    }
+    public function infoArray()
+    {
+        return [
+            'intr'=>'介绍',
+            'operations'=>'操作',
+        ];
+    }
+
 
 }

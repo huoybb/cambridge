@@ -5,6 +5,7 @@
         <li><a href="/">首页</a></li>
         <li class="active">{{ list.name }}</li></ol>
     <h1>系列：{{ list.name }} </h1>
+    {% include 'layouts/info' with ['Owner':list] %}
 
     <h2>图书</h2>
     <div class="row">

@@ -3,6 +3,7 @@
 class Lists extends \core\myModel
 {
     use CommentableTrait;
+    use \core\myPresenterTrait;
 
     /**
      *
@@ -26,6 +27,27 @@ class Lists extends \core\myModel
      * @Column(type="string", length=255, nullable=false)
      */
     public $name;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=true)
+     */
+    public $grade;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=true)
+     */
+    public $cef;
+
+    /**
+     *
+     * @var string
+     * @Column(type="string", length=255, nullable=true)
+     */
+    public $esol;
 
     /**
      *
@@ -100,6 +122,17 @@ class Lists extends \core\myModel
     {
         return Books::findByList($this);
     }
+
+    public function infoArray()
+    {
+        return [
+            'grade'=>'推荐年级',
+            'cef'=>'CEF',
+            'esol'=>'ESOL',
+            'operations'=>'操作'
+        ];
+    }
+
 
 
 
