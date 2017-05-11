@@ -98,6 +98,13 @@ class Books extends \core\myModel
             ->execute();
     }
 
+    public static function findByKeywords($keywords)
+    {
+        return static::query()
+            ->where('name like :keywords:',['keywords'=>'%'.$keywords.'%'])
+            ->execute();
+    }
+
     /**
      * Initialize method for model.
      */

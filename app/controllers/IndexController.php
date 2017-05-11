@@ -21,7 +21,6 @@ class IndexController extends \core\myController
 //        dd();
         $this->view->lists = Lists::find();
     }
-
     protected function getListAndBookFromWeb()
     {
         $data = \webParser\Camstory::getBooklist();

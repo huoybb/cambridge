@@ -31,4 +31,10 @@ class BooksController extends \core\myController
         $this->view->setVars(compact('book'));
     }
 
+    public function searchAction($keywords)
+    {
+        $this->view->books = Books::findByKeywords($keywords);
+        $this->view->keywords = $keywords;
+    }
+
 }

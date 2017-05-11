@@ -17,6 +17,7 @@ $router->addx('/books/{book:[0-9]+}','books::show');
 $router->addx('/books/{book:[0-9]+}/edit','books::edit')->setMiddlewares([setUrlBeforeMiddleware::class]);
 $router->addx('/books/{book:[0-9]+}/delete','books::delete')->setMiddlewares([setUrlBeforeMiddleware::class,BooksForm::class]);
 $router->addx('/books/{book:[0-9]+}/addAuthor','books::addAuthor')->setMiddlewares([setUrlBeforeMiddleware::class]);
+$router->addx('/search/{keywords}','books::search');
 
 $router->addx('/chapters/{chapter:[0-9]+}','chapters::show');
 
@@ -27,4 +28,5 @@ $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setMiddle
 
 $router->addx('/authors','authors::index');
 $router->addx('/authors/{author:[0-9]+}','authors::show');
+
 return $router;
