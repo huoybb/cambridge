@@ -2,7 +2,8 @@
 {% block title %}作者：{{ author.name }}{% endblock %}
 {% block content %}
     <ol class="breadcrumb">
-        <li><a href="/">首页</a></li>
+        <li><a href="{{ url(['for':'home']) }}">首页</a></li>
+        <li><a href="{{ url(['for':'authors.index']) }}">作者清单</a></li>
         <li class="active">{{ author.name }}</li></ol>
     <h1>作者：{{ author.name }} </h1>
     {#{% include 'layouts/info' with ['Owner':author] %}#}

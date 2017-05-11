@@ -13,4 +13,13 @@ class BooksController extends \core\myController
         $this->view->setVars(compact('book'));
     }
 
+    public function addAuthorAction(Books $book)
+    {
+        if($this->request->isPost()){
+            $book->addAuthor(['author'=>$this->request->getPost('name')]);
+            return $this->redirectBack();
+        }
+        $this->view->setVars(compact('book'));
+    }
+
 }

@@ -1,12 +1,22 @@
 <div class="row">
     <div class="col-md-2"><img src="{{ book.img() }}" alt="poster" width="163" height="250"> </div>
-    <div class="col-md-3">{{ book.info }}</div>
+    <div class="col-md-3">
+        {{ book.present('info') }}
+        <span>操作：{{ book.present('operations') }}</span>
+    </div>
     <div class="col-md-7">
         <h2>作者介绍</h2>
-        <h4><a href="{{ url(['for':'authors.show','author':book.author().id]) }}">{{ book.author().name }}</a></h4>
-        <p>{{ book.author().intr }}</p>
-        <h4><a href="{{ url(['for':'authors.show','author':book.translator().id]) }}">{{ book.translator().name }}</a></h4>
-        <p>{{ book.translator().intr }}</p>
+
+        {% for author in book.author() %}
+            <h4><a href="{{ url(['for':'authors.show','author':author.id]) }}">{{ author.name }}</a></h4>
+            <p>{{ author.intr }}</p>
+        {% endfor %}
+
+        {% for author in book.translator() %}
+            <h4><a href="{{ url(['for':'authors.show','author':author.id]) }}">{{ author.name }}</a></h4>
+            <p>{{ author.intr }}</p>
+        {% endfor %}
+
     </div>
 </div>
 

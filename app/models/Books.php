@@ -175,18 +175,24 @@ class Books extends \core\myModel
      */
     public function addAuthor($data)
     {
-        Authors::findOrNew([
-            'name'=>$data['author'],
-            'intr'=>$data['author_intr'],
-            'notes'=>'作者',
-            'authorable'=>$this,
-        ]);
-        Authors::findOrNew([
-            'name'=>$data['translator'],
-            'intr'=>$data['translator_intr'],
-            'notes'=>'译者',
-            'authorable'=>$this,
-        ]);
+        if(isset($data['author'])){
+            $row = [
+                'name'=>$data['author'],
+                'notes'=>'作者',
+                'authorable'=>$this,
+            ];
+            if(isset($data['author_intr'])) $row['intr']=$data['author_intr'];
+
+            Authors::findOrNew($row);
+        }
+        if(isset($data['translator'])){
+            Authors::findOrNew([
+                'name'=>$data['translator'],
+                'intr'=>$data['translator_intr'],
+                'notes'=>'译者',
+                'authorable'=>$this,
+            ]);
+        }
     }
     public function authors()
     {
@@ -196,17 +202,19 @@ class Books extends \core\myModel
     }
     public function author()
     {
+        $results = [];
         foreach($this->authors() as $author){
-            if($author->authorable->notes == '作者') return $author;
+            if($author->authorable->notes == '作者') $results[]=$author;
         }
-        return null;
+        return collect($results);
     }
     public function translator()
     {
+        $results = [];
         foreach($this->authors() as $author){
-            if($author->authorable->notes == '译者') return $author;
+            if($author->authorable->notes == '译者') $results[]=$author;
         }
-        return null;
+        return collect($results);
     }
 
 

@@ -8,6 +8,11 @@
  */
 class AuthorsController extends \core\myController
 {
+    public function indexAction()
+    {
+        $this->view->authors = Authors::find();
+    }
+
     public function showAction(Authors $author)
     {
         $this->view->setVars(compact('author'));

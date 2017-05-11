@@ -6,7 +6,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                {#<li><a href="{{ url(['for':'places.index']) }}">地点</a></li>#}
+                <li><a href="{{ url(['for':'authors.index']) }}">作者</a></li>
                 {#<li><a href="{{ url(['for':'stopovers.index']) }}">停留</a></li>#}
                 {#<li><a href="{{ url(['for':'tasks.index']) }}">任务</a></li>#}
                 {#<li><a href="{{ url(['for':'actionplans.index']) }}">行动计划</a></li>#}
