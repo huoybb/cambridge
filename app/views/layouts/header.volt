@@ -42,7 +42,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <form id="search-form" class="navbar-form navbar-left" role="search">
-                        <input type="text" id="search" name="search" class="form-control" placeholder="Search">
+                        <input type="text" id="search" name="search" class="form-control" placeholder="Search" {% if keywords is defined %} value="{{ keywords }}" {% endif %}>
                         <button type="submit" class="btn btn-default">查询</button>
                     </form>
                     <script src="/js/search.js"></script>
