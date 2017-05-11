@@ -15,6 +15,10 @@ class IndexController extends \core\myController
 //            ];
 //            $book->addAuthor($data);
 //        }
+//        foreach (Books::find() as $book){
+//            echo $book->teachplan_url().'<br>';
+//        }
+//        dd();
         $this->view->lists = Lists::find();
     }
 

@@ -30,6 +30,18 @@ class BooksPresenter extends \core\myPresenter
         $result .= $this->buildGroupedButton($opers);
         return $result;
     }
+    public function answer()
+    {
+        return $this->createLink("/files/answers/{$this->pdf()}",'阅读练习答案');
+    }
+    public function teachplan()
+    {
+        return $this->createLink("/files/teachplans/{$this->pdf()}",'教师教案');
+    }
 
+    public function pdf()
+    {
+        return "{$this->entity->levelid}_{$this->entity->bid}.pdf";
+    }
 
 }

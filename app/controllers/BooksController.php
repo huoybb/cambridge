@@ -12,6 +12,15 @@ class BooksController extends \core\myController
     {
         $this->view->setVars(compact('book'));
     }
+    public function editAction(Books $book)
+    {
+        if($this->request->isPost()){
+            $book->save($this->request->getPost());
+            return $this->redirectBack();
+        }
+        $this->view->setVars(compact('book'));
+    }
+
 
     public function addAuthorAction(Books $book)
     {

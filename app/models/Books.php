@@ -217,6 +217,17 @@ class Books extends \core\myModel
         return collect($results);
     }
 
+    public function answer_url()
+    {
+        return "http://static2.iyuba.com/camstory/answer/{$this->levelid}_{$this->bid}.pdf";
+    }
+    public function teachplan_url()
+    {
+        return "http://static2.iyuba.com/camstory/teachingplan/{$this->levelid}_{$this->bid}.pdf";
+    }
+    
+
+
 
 
 
