@@ -56,7 +56,7 @@
         </li>
     </ul>
     <p>本体系是由剑桥大学出版社经过科学的研究和实践而开发的一套阅读级别测试体系。该体系参照的分级标准是“欧洲共同语言参考框架（CEF）”和剑桥大学外语考试部（ESOL）的“剑桥五级考试”。与“剑桥双语分级阅读•小说馆”分级一致，该测试系统将读者的阅读水平分为7个级别，读者点击进入相应级别，通过轻松、有趣的词汇测试，即可了解自己是否适合阅读该级别的读物。</p>
-
+    <a target="_blank" href="http://www.cambridgeenglish.org/test-your-english/" class="btn-info btn btn-xs">剑桥在线英语测试</a>
     {#<h2>下载地址</h2>#}
     {#{% for chapter in chapters %}#}
         {#{{ chapter.mp3_url() }}#}

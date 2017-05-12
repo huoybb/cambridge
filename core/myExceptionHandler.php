@@ -26,16 +26,14 @@ class myExceptionHandler extends Plugin
     }
     protected function handleException(Dispatcher $dispatcher, Exception $exception,$action)
     {
-        $ActionArray = $this->parseAction($action);
-        $dispatcher->forward($ActionArray);
         $dispatcher->setParam('message', $exception->getMessage());
         $dispatcher->setParam('line',$exception->getLine());
         $dispatcher->setParam('file',$exception->getFile());
         $dispatcher->setParam('code',$exception->getCode());
         $dispatcher->setParam('trace',$exception->getTraceAsString());
-        $dispatcher->setParam('exception',$exception);
+        $dispatcher->setParam('exception',get_class($exception));
 
-
+        $dispatcher->forward($this->parseAction($action));
         $dispatcher->dispatch();//由于异常处理时中断了正常的引导过程，需要单独来重新dispatch
     }
 

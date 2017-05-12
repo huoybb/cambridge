@@ -4,7 +4,7 @@
     <h1>异常</h1>
     <div class="row">
         <div class="col-md-2" align="right">exception:</div>
-        <div class="col-md-10">{{ get_class(exception) }}</div>
+        <div class="col-md-10">{{ exception }}</div>
         <div class="col-md-2" align="right">file:</div>
         <div class="col-md-10">{{ file }}</div>
         <div class="col-md-2" align="right">line:</div>
