@@ -9,7 +9,7 @@
 class BooksForm extends \core\myForm
 {
     protected $only = [
-        'index','name','url','info','story','author','list_id','levelid','bid'
+        'index','name','url','info','story','author','list_id','levelid','bid','douban_id'
     ];
     public $rules = [
         'name'=>'required',

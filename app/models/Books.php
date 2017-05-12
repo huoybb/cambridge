@@ -232,11 +232,20 @@ class Books extends \core\myModel
     {
         return "http://static2.iyuba.com/camstory/teachingplan/{$this->levelid}_{$this->bid}.pdf";
     }
-    
 
+    public function douban()
+    {
+        if($this->douban_id){
+            return "https://book.douban.com/subject/{$this->douban_id}/";
+        }
+        return "https://book.douban.com/subject_search?search_text={$this->keywords()}";
+    }
 
-
-
+    private function keywords()
+    {
+        $this->author()->implode('name',' ');
+        return preg_replace('/[^u4e00-^u9fa5\s]+/sim', '',$this->name) .' '. $this->author()->implode('name',' ');
+    }
 
 
 }

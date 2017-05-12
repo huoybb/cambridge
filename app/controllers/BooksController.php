@@ -36,5 +36,17 @@ class BooksController extends \core\myController
         $this->view->books = Books::findByKeywords($keywords);
         $this->view->keywords = $keywords;
     }
+    public function getDoubanIDAction($douban_id,$keywords)
+    {
+        $books = Books::findByKeywords($keywords);
+        if($books->count() == 1){
+            $books->getFirst()->save(['douban_id'=>$douban_id]);
+            return $this->redirect(['for'=>'books.show','book'=>$books->getFirst()->id]);
+        }
+        var_dump('请检查，看看是否存在重名的图书或者关键词有重复的？');
+        dd($books);
+
+    }
+
 
 }
