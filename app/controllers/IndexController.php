@@ -19,6 +19,15 @@ class IndexController extends \core\myController
 //            echo $book->teachplan_url().'<br>';
 //        }
 //        dd();
+//        \core\myFactory::define(Chapters::class,function(){
+//            $faker = \Faker\Factory::create();
+//            return [
+//                'index'=>$faker->numberBetween(1,50),
+//                'name'=>$faker->name,
+//                'book_id'=>$faker->numberBetween(1,63),
+//            ];
+//        });
+//        dd(factory(Chapters::class)->create([],2));
         $this->view->lists = Lists::find();
     }
     protected function getListAndBookFromWeb()

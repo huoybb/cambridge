@@ -80,3 +80,9 @@ if(! function_exists('getMyEnv')){
         return 'web';
     }
 }
+
+if(! function_exists('factory')){
+    function factory(string $className){
+        return new \core\myFactory($className);
+    }
+}
