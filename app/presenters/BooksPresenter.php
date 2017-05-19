@@ -12,7 +12,9 @@ class BooksPresenter extends \core\myPresenter
     public $entity;
     public function info()
     {
-        return preg_replace('%<a.+?>.+?</a>%sim', '', $this->entity->info);
+        $info =  $this->stripLinks($this->entity->info);
+        $info =  $this->replaceBlankWithBr($info);
+        return $this->stripExtrainfo($info);
     }
 
     public function operations()
@@ -43,6 +45,21 @@ class BooksPresenter extends \core\myPresenter
     public function pdf()
     {
         return "{$this->entity->levelid}_{$this->entity->bid}.pdf";
+    }
+
+    private function stripLinks($info)
+    {
+        return preg_replace('%<a.+?>.+?</a>%sim', '',$info);
+    }
+
+    private function replaceBlankWithBr($info)
+    {
+        return preg_replace('/\s{4}\s+/sim', '<br>', strip_tags($info));
+    }
+
+    private function stripExtrainfo($info)
+    {
+        return preg_replace('/所在丛书：.+$/','',$info);
     }
 
 }

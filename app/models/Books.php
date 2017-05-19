@@ -105,6 +105,16 @@ class Books extends \core\myModel
             ->execute();
     }
 
+    public static function findByBlcupKey($key)
+    {
+        $url = "http://www.blcup.com/PInfo/index/$key";
+        $intance = static::query()
+            ->where('url = :url:',['url'=>$url])
+            ->execute()->getFirst();
+        if(!$intance) $intance = static::saveNew(\webParser\blcup::getBookInfo($url));
+        return $intance;
+    }
+
     /**
      * Initialize method for model.
      */

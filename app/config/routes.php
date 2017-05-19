@@ -30,4 +30,6 @@ $router->addx('/comments/{comment:[0-9]+}/delete','comments::delete')->setMiddle
 $router->addx('/authors','authors::index');
 $router->addx('/authors/{author:[0-9]+}','authors::show');
 
+$router->addx('/getBookInfo/{key:[0-9]+}','webparsers::getbookinfo');
+
 return $router;

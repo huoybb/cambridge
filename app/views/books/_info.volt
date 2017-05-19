@@ -7,15 +7,20 @@
     <div class="col-md-7">
         <h2>作者介绍</h2>
 
-        {% for author in book.author() %}
-            <h4><a href="{{ url(['for':'authors.show','author':author.id]) }}">{{ author.name }}</a></h4>
-            <p>{{ author.intr }}</p>
-        {% endfor %}
+        {% if book.author().count() %}
+            {% for author in book.author() %}
+                <h4><a href="{{ url(['for':'authors.show','author':author.id]) }}">{{ author.name }}</a></h4>
+                <p>{{ author.intr }}</p>
+            {% endfor %}
 
-        {% for author in book.translator() %}
-            <h4><a href="{{ url(['for':'authors.show','author':author.id]) }}">{{ author.name }}</a></h4>
-            <p>{{ author.intr }}</p>
-        {% endfor %}
+            {% for author in book.translator() %}
+                <h4><a href="{{ url(['for':'authors.show','author':author.id]) }}">{{ author.name }}</a></h4>
+                <p>{{ author.intr }}</p>
+            {% endfor %}
+        {% else %}
+            {{ book.author }}
+        {% endif %}
+
 
     </div>
 </div>

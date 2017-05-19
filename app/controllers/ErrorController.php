@@ -27,6 +27,7 @@ class ErrorController extends \core\myController
     public function errorAction()
     {
         $this->setViewParams();
+        return $this->view->render('error','error');
     }
 
 
