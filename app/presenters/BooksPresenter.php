@@ -16,6 +16,15 @@ class BooksPresenter extends \core\myPresenter
         $info =  $this->replaceBlankWithBr($info);
         return $this->stripExtrainfo($info);
     }
+    public function links()
+    {
+        $result = $this->buildGroupedButton([
+            ['url'=>$this->entity->url,'title'=>'原版','class'=>"btn btn-info btn-xs"],
+            ['url'=>$this->entity->douban(),'title'=>'豆瓣','class'=>"btn btn-info btn-xs"],
+        ]);
+        return $result;
+    }
+
 
     public function operations()
     {
@@ -25,9 +34,9 @@ class BooksPresenter extends \core\myPresenter
         ]);
 
         $opers = [
-            ['url'=>$this->url(['for'=>'books.addAuthor','book'=>$this->entity->id]),'title'=>'作者','class'=>"btn btn-info btn-xs"],
-            ['url'=>$this->entity->url,'title'=>'原版','class'=>"btn btn-info btn-xs"],
-            ['url'=>$this->entity->douban(),'title'=>'豆瓣','class'=>"btn btn-info btn-xs"],
+            ['url'=>$this->url(['for'=>'books.addAuthor','book'=>$this->entity->id]),'title'=>'添加作者','class'=>"btn btn-info btn-xs"],
+            ['url'=>$this->url(['for'=>'books.addResources','book'=>$this->entity->id]),'title'=>'添加资源','class'=>"btn btn-info btn-xs"],
+
         ];
 
         $result .= $this->buildGroupedButton($opers);
@@ -35,17 +44,23 @@ class BooksPresenter extends \core\myPresenter
     }
     public function answer()
     {
-        return $this->createLink("/files/answers/{$this->pdf()}",'阅读练习答案');
+        $file = "/files/answers/{$this->pdf()}";
+        if(!file_exists(BASE_PATH."/public".$file)) return null;
+        return $this->createLink($file,'阅读练习答案');
     }
     public function teachplan()
     {
-        return $this->createLink("/files/teachplans/{$this->pdf()}",'教师教案');
+        $file = "/files/teachplans/{$this->pdf()}";
+        if(!file_exists(BASE_PATH."/public".$file)) return null;
+        return $this->createLink($file,'教师教案');
     }
 
     public function pdf()
     {
         return "{$this->entity->levelid}_{$this->entity->bid}.pdf";
     }
+
+
 
     private function stripLinks($info)
     {

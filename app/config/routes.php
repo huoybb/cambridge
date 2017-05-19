@@ -17,6 +17,7 @@ $router->addx('/books/{book:[0-9]+}','books::show');
 $router->addx('/books/{book:[0-9]+}/edit','books::edit')->setMiddlewares([setUrlBeforeMiddleware::class]);
 $router->addx('/books/{book:[0-9]+}/delete','books::delete')->setMiddlewares([setUrlBeforeMiddleware::class,BooksForm::class]);
 $router->addx('/books/{book:[0-9]+}/addAuthor','books::addAuthor')->setMiddlewares([setUrlBeforeMiddleware::class]);
+$router->addx('/books/{book:[0-9]+}/addResources','books::addResources')->setMiddlewares([setUrlBeforeMiddleware::class]);
 $router->addx('/search/{keywords}','books::search');
 $router->addx('/getDoubanID/{douban_id}/{keywords}','books::getDoubanID');
 

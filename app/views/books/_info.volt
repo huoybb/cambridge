@@ -2,7 +2,8 @@
     <div class="col-md-2"><img src="{{ book.img() }}" alt="poster" width="163" height="250"> </div>
     <div class="col-md-3">
         {{ book.present('info') }}
-        <span>操作：{{ book.present('operations') }}</span>
+        链接：{{ book.present('links') }} <br>
+        操作：{{ book.present('operations') }} <br>
     </div>
     <div class="col-md-7">
         <h2>作者介绍</h2>
