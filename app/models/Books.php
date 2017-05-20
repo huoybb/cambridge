@@ -264,9 +264,10 @@ class Books extends \core\myModel
         return preg_replace('/[^u4e00-^u9fa5\s]+/sim', '',$this->name) .' '. $this->author()->implode('name',' ');
     }
 
-    public function addResources($path)
+    public function addResources($path = null)
     {
-        $files = scandir(BASE_PATH.'/public'.$path);
+        if($path == null) $path = $this->rescourcePath();
+        $files = scandir($this->resourceRealPath($path));
         foreach($files as $file){
             if($file == '.' || $file == '..') continue;
             if (preg_match('/([0-9]+)\s*(.*?).mp3/sim', $file, $regs)) {
@@ -291,5 +292,17 @@ class Books extends \core\myModel
         if(!$instance) $instance = Chapters::saveNew($data);
         return $instance;
     }
+
+    public function rescourcePath()
+    {
+        return $path = '/resources/'.$this->present('ISBN').'/';
+    }
+    public function resourceRealPath($relativePath = null)
+    {
+        if($relativePath == null) $relativePath = $this->rescourcePath();
+        return BASE_PATH.'/public'.$relativePath;
+    }
+
+
 
 }
