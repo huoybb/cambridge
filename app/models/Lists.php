@@ -74,6 +74,13 @@ class Lists extends \core\myModel
             ->execute()->getFirst();
     }
 
+    public static function findByName($listName)
+    {
+        return static::query()
+            ->where('name = :name:',['name'=>$listName])
+            ->execute()->getFirst();
+    }
+
     /**
      * Initialize method for model.
      */

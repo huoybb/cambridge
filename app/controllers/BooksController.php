@@ -21,6 +21,14 @@ class BooksController extends \core\myController
         $this->view->setVars(compact('book'));
     }
 
+    public function deleteAction(Books $book)
+    {
+        $response = $this->redirect(['for'=>'lists.show','list'=>$book->list_id]);
+        $book->delete();
+        return $response;
+    }
+
+
 
     public function addAuthorAction(Books $book)
     {

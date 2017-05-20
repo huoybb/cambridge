@@ -16,6 +16,14 @@ class BooksPresenter extends \core\myPresenter
         $info =  $this->replaceBlankWithBr($info);
         return $this->stripExtrainfo($info);
     }
+    public function ISBN()
+    {
+        if (preg_match('/ISBN：(.*?)<br>/sim', $this->info(), $regs)) {
+            return trim($regs[1]);
+        }
+        return null;
+    }
+
     public function links()
     {
         $result = $this->buildGroupedButton([

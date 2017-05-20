@@ -105,6 +105,10 @@ class Books extends \core\myModel
             ->execute();
     }
 
+    /**
+     * @param $key
+     * @return Books
+     */
     public static function findByBlcupKey($key)
     {
         $url = "http://www.blcup.com/PInfo/index/$key";
@@ -248,6 +252,9 @@ class Books extends \core\myModel
         if($this->douban_id){
             return "https://book.douban.com/subject/{$this->douban_id}/";
         }
+        if($isbn = $this->present('ISBN')){
+            return "https://book.douban.com/subject_search?search_text={$isbn}";
+        }
         return "https://book.douban.com/subject_search?search_text={$this->keywords()}";
     }
 
@@ -255,6 +262,29 @@ class Books extends \core\myModel
     {
         $this->author()->implode('name',' ');
         return preg_replace('/[^u4e00-^u9fa5\s]+/sim', '',$this->name) .' '. $this->author()->implode('name',' ');
+    }
+
+    /**
+     * @return Books
+     */
+    public function fetchPosterFromWeb()
+    {
+        $img = file_get_contents($this->img);
+        file_put_contents('images/'.basename($this->img),$img);
+        return $this;
+    }
+
+    public function setSerialFromTitle()
+    {
+        if (preg_match('/^.+（(.+)）/sim', $this->name, $regs)) {
+            $listName = $regs[1];
+            $list = Lists::findByName($listName);
+            if($list){
+                $this->save(['list_id'=>$list->id]);
+            }
+        }
+        return $this;
+
     }
 
 
