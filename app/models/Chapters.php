@@ -56,6 +56,13 @@ class Chapters extends \core\myModel
             ->execute();
     }
 
+    public static function findByfilename($filename)
+    {
+        return static::query()
+            ->where('filename = :file:',['file'=>$filename])
+            ->execute()->getFirst();
+    }
+
     /**
      * Initialize method for model.
      */
@@ -109,6 +116,8 @@ class Chapters extends \core\myModel
     }
     public function mp3()
     {
+        if($this->filename) return $this->filename;
+
         $book = $this->book();
         $levelid = $book->levelid;
         $bid = $book->bid;

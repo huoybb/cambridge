@@ -12,7 +12,7 @@
                 </tr>
                 {% for chapter in book.chapters() %}
                     <tr chapter="{{ chapter.id }}">
-                        <td>{{ chapter.id }}</td>
+                        <td>{{ chapter.index }}</td>
                         <td><a href="{{ url(['for':'chapters.show','chapter':chapter.id]) }}">{{ chapter.name }}</a></td>
                         <td><a href="#" data="{{ chapter.mp3() }}" class="mp3">播放</a></td>
                     </tr>

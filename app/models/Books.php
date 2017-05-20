@@ -264,4 +264,32 @@ class Books extends \core\myModel
         return preg_replace('/[^u4e00-^u9fa5\s]+/sim', '',$this->name) .' '. $this->author()->implode('name',' ');
     }
 
+    public function addResources($path)
+    {
+        $files = scandir(BASE_PATH.'/public'.$path);
+        foreach($files as $file){
+            if($file == '.' || $file == '..') continue;
+            if (preg_match('/([0-9]+)\s*(.*?).mp3/sim', $file, $regs)) {
+                [$filename,$index,$name] = $regs;
+                $filename = $path.$filename;
+                $this->addChapter(compact('index','name','filename'));
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @param $data
+     * @return Chapters
+     */
+    public function addChapter($data)
+    {
+        $data = array_merge($data,[
+            'book_id'=>$this->id,
+        ]);
+        $instance = Chapters::findByfilename($data['filename']);
+        if(!$instance) $instance = Chapters::saveNew($data);
+        return $instance;
+    }
+
 }

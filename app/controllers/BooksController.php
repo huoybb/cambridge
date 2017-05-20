@@ -55,6 +55,11 @@ class BooksController extends \core\myController
         dd($books);
 
     }
-
+    public function addResourcesAction(Books $book)
+    {
+        $path = '/resources/'.$book->present('ISBN').'/';
+        if(is_dir(BASE_PATH.'/public'.$path)) $book->addResources($path);
+        return $this->redirect(['for'=>'books.show','book'=>$book->id]);
+    }
 
 }
