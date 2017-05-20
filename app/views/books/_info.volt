@@ -1,11 +1,11 @@
 <div class="row">
     <div class="col-md-2"><img src="{{ book.img() }}" alt="poster" width="163" height="250"> </div>
-    <div class="col-md-3">
+    <div class="col-md-4">
         {{ book.present('info') }}
         链接：{{ book.present('links') }} <br>
         操作：{{ book.present('operations') }} <br>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
         <h2>作者介绍</h2>
 
         {% if book.author().count() %}

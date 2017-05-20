@@ -53,13 +53,19 @@ class BooksPresenter extends \core\myPresenter
     public function answer()
     {
         $file = "/files/answers/{$this->pdf()}";
-        if(!file_exists(BASE_PATH."/public".$file)) return null;
-        return $this->createLink($file,'阅读练习答案');
+        if(!file_exists(BASE_PATH."/public".$file)) {
+            $file = $this->getResource('练习答案');
+            if(!$file) return null;
+        }
+        return $this->createLink($file,'练习答案');
     }
     public function teachplan()
     {
         $file = "/files/teachplans/{$this->pdf()}";
-        if(!file_exists(BASE_PATH."/public".$file)) return null;
+        if(!file_exists(BASE_PATH."/public".$file)){
+            $file = $this->getResource('教师教案');
+            if(!$file) return null;
+        }
         return $this->createLink($file,'教师教案');
     }
 
@@ -83,6 +89,19 @@ class BooksPresenter extends \core\myPresenter
     private function stripExtrainfo($info)
     {
         return preg_replace('/所在丛书：.+$/','',$info);
+    }
+
+    private function getResource($keywords)
+    {
+        if(is_dir($this->entity->resourceRealPath())){
+            $files = scandir($this->entity->resourceRealPath());
+            foreach($files as $filename){
+                if (preg_match('/^.*'.$keywords.'.pdf\Z/im', $filename)) {
+                    return $this->entity->rescourcePath().$filename;
+                }
+            }
+        }
+        return null;
     }
 
 }
