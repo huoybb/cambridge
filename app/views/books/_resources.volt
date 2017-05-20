@@ -5,10 +5,10 @@
         <div class="panel-body">
             <ul>
                 {% if book.present('answer') %}
-                    <li>{{ book.present('answer') }} <pre>files answers {{ book.present('pdf') }}</pre></li>
+                    <li>{{ book.present('answer') }} <pre>{{ book.present('answerfile') }}</pre></li>
                 {% endif %}
                 {% if book.present('teachplan') %}
-                    <li>{{ book.present('teachplan') }} <pre>files teachplans {{ book.present('pdf') }}</pre></li>
+                    <li>{{ book.present('teachplan') }} <pre>{{ book.present('teachplanfile') }}</pre></li>
                 {% endif %}
             </ul>
         </div>

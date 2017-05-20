@@ -53,24 +53,37 @@ class BooksPresenter extends \core\myPresenter
     public function answer()
     {
         $file = "/files/answers/{$this->pdf()}";
-        if(!file_exists(BASE_PATH."/public".$file)) {
+        if(is_dir(BASE_PATH."/public".$file)) {
             $file = $this->getResource('练习答案');
             if(!$file) return null;
         }
         return $this->createLink($file,'练习答案');
     }
+    public function answerfile()
+    {
+        if(!$this->pdf()) return str_replace('/','\\',$this->getResource('练习答案'));
+        return "files\answers\\{$this->pdf()}";
+    }
+
     public function teachplan()
     {
         $file = "/files/teachplans/{$this->pdf()}";
-        if(!file_exists(BASE_PATH."/public".$file)){
+        if(is_dir(BASE_PATH."/public".$file)){
             $file = $this->getResource('教师教案');
             if(!$file) return null;
         }
         return $this->createLink($file,'教师教案');
     }
+    public function teachplanfile()
+    {
+        if(!$this->pdf()) return str_replace('/','\\',$this->getResource('教师教案'));
+        return "files\\teachplans\\{$this->pdf()}";
+    }
+
 
     public function pdf()
     {
+        if($this->entity->levelid === null) return null;
         return "{$this->entity->levelid}_{$this->entity->bid}.pdf";
     }
 
