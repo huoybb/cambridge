@@ -115,7 +115,7 @@ class Books extends \core\myModel
         $intance = static::query()
             ->where('url = :url:',['url'=>$url])
             ->execute()->getFirst();
-        if(!$intance) $intance = static::saveNew(\webParser\blcup::getBookInfo($url));
+        if(!$intance)  $intance = static::saveNew(\webParser\blcup::getBookInfo($url));
         return $intance;
     }
 
@@ -263,29 +263,5 @@ class Books extends \core\myModel
         $this->author()->implode('name',' ');
         return preg_replace('/[^u4e00-^u9fa5\s]+/sim', '',$this->name) .' '. $this->author()->implode('name',' ');
     }
-
-    /**
-     * @return Books
-     */
-    public function fetchPosterFromWeb()
-    {
-        $img = file_get_contents($this->img);
-        file_put_contents('images/'.basename($this->img),$img);
-        return $this;
-    }
-
-    public function setSerialFromTitle()
-    {
-        if (preg_match('/^.+（(.+)）/sim', $this->name, $regs)) {
-            $listName = $regs[1];
-            $list = Lists::findByName($listName);
-            if($list){
-                $this->save(['list_id'=>$list->id]);
-            }
-        }
-        return $this;
-
-    }
-
 
 }

@@ -10,9 +10,7 @@ class WebparsersController extends \core\myController
 {
     public function getbookinfoAction($key)
     {
-        $book = Books::findByBlcupKey($key)
-            ->fetchPosterFromWeb()
-            ->setSerialFromTitle();
+        $book = Books::findByBlcupKey($key);
 
         return $this->redirect(['for'=>'books.show','book'=>$book->id]);
     }
