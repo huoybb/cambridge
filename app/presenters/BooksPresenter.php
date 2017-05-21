@@ -26,13 +26,17 @@ class BooksPresenter extends \core\myPresenter
 
     public function links()
     {
-        $result = $this->buildGroupedButton([
+        $data = [
             ['url'=>$this->entity->url,'title'=>'原版','class'=>"btn btn-info btn-xs"],
             ['url'=>$this->entity->douban(),'title'=>'豆瓣','class'=>"btn btn-info btn-xs"],
-        ]);
+            ['url'=>$this->entity->blcup(),'title'=>'北语','class'=>"btn btn-info btn-xs"],
+        ];
+        if($this->entity->baiduyun){
+            $data[]=['url'=>$this->entity->baiduyun,'title'=>'百度云','class'=>"btn btn-info btn-xs"];
+        }
+        $result = $this->buildGroupedButton($data);
         return $result;
     }
-
 
     public function operations()
     {

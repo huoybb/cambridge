@@ -20,7 +20,8 @@ class bookinfoParser extends myParser
         $info = $this->crawler->filter('.listrit5b1')->html();
         $story = $this->crawler->filter('.psection')->first()->html();
         $author = $this->crawler->filter('.psection')->eq(1)->html();
+        $baiduyun = $this->crawler->filter('.psection')->eq(3)->filter('a')->attr('href');
 
-        return compact('img','name','info','story','author');
+        return compact('img','name','info','story','author','baiduyun');
     }
 }

@@ -112,11 +112,20 @@ class Books extends \core\myModel
     public static function findByBlcupKey($key)
     {
         $url = "http://www.blcup.com/PInfo/index/$key";
-        $intance = static::query()
+        $instance = static::query()
             ->where('url = :url:',['url'=>$url])
             ->execute()->getFirst();
-        if(!$intance)  $intance = static::saveNew(\webParser\blcup::getBookInfo($url));
-        return $intance;
+        if(!$instance)  {
+            $data = \webParser\blcup::getBookInfo($url);
+            $name =  preg_replace('/（.*?）/im', '',$data['name']);
+            $instance =static::findByKeywords($name)->getFirst();
+            if(!$instance){
+                $instance = static::saveNew($data);
+            }else{
+                $instance->save($data);
+            }
+        }
+        return $instance;
     }
 
     /**
@@ -263,6 +272,10 @@ class Books extends \core\myModel
         $this->author()->implode('name',' ');
         return preg_replace('/[^u4e00-^u9fa5\s]+/sim', '',$this->name) .' '. $this->author()->implode('name',' ');
     }
+    private function name_zh()
+    {
+        return preg_replace('/([^u4e00-^u9fa5]+)[a-zA-Z]+.*/sim', '$1',$this->name);
+    }
 
     public function addResources($path = null)
     {
@@ -301,6 +314,11 @@ class Books extends \core\myModel
     {
         if($relativePath == null) $relativePath = $this->rescourcePath();
         return BASE_PATH.'/public'.$relativePath;
+    }
+
+    public function blcup()
+    {
+        return "http://www.blcup.com/PList?_content={$this->name_zh()}";
     }
 
 

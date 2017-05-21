@@ -32,5 +32,4 @@ $router->addx('/authors','authors::index');
 $router->addx('/authors/{author:[0-9]+}','authors::show');
 
 $router->addx('/getBookInfo/{key:[0-9]+}','webparsers::getbookinfo');
-
 return $router;
