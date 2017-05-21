@@ -13,9 +13,26 @@ class BooksPresenter extends \core\myPresenter
     public function info()
     {
         $info =  $this->stripLinks($this->entity->info);
+        $info = strip_tags($info);
         $info =  $this->replaceBlankWithBr($info);
-        return $this->stripExtrainfo($info);
+        $info =  $this->stripExtrainfo($info);
+        return $info;
     }
+    public function serial()
+    {
+        if (preg_match('/所在丛书：(.*?)<br>/im', $this->info(), $regs)) {
+            return $regs[1];
+        }
+        return null;
+    }
+
+    public function showLink()
+    {
+//        return <a href="{{ url(['for':'books.show','book':book.id]) }}">{{ book.name }}
+        return $this->createLink($this->url(['for'=>'books.show','book'=>$this->entity->id]),$this->entity->name);
+    }
+
+
     public function ISBN()
     {
         if (preg_match('/ISBN：(.*?)<br>/sim', $this->info(), $regs)) {
@@ -95,17 +112,19 @@ class BooksPresenter extends \core\myPresenter
 
     private function stripLinks($info)
     {
-        return preg_replace('%<a.+?>.+?</a>%sim', '',$info);
+        return preg_replace('%<a.+?>(.+?)</a>%sim', '$1',$info);
     }
 
     private function replaceBlankWithBr($info)
     {
-        return preg_replace('/\s{4}\s+/sim', '<br>', strip_tags($info));
+        return preg_replace('/\s{4}\s+/sim', '<br>', $info);
     }
 
     private function stripExtrainfo($info)
     {
-        return preg_replace('/所在丛书：.+$/','',$info);
+        $info =  preg_replace('/原定价：.+$/','',$info);
+        $info =  preg_replace('/所在丛书：<br>/','所在丛书：',$info);
+        return $info;
     }
 
     private function getResource($keywords)

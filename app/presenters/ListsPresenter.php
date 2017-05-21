@@ -14,7 +14,7 @@ class ListsPresenter extends \core\myPresenter
     {
         $result = $this->buildGroupedButton([
             ['url'=>$this->url(['for'=>'lists.edit','list'=>$this->entity->id]),'title'=>'编辑','class'=>"btn btn-warning btn-xs"],
-            ['url'=>$this->url(['for'=>'lists.delete','list'=>$this->entity->id]),'title'=>'删除','class'=>"btn btn-danger btn-xs"],
+//            ['url'=>$this->url(['for'=>'lists.delete','list'=>$this->entity->id]),'title'=>'删除','class'=>"btn btn-danger btn-xs"],
         ]);
         return $result;
     }
