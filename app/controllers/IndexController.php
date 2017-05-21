@@ -5,29 +5,21 @@ class IndexController extends \core\myController
 
     public function indexAction()
     {
-//        foreach(Books::find() as $book){
-//            preg_match('%^<h3>作者简介</h3>\s*<h4>(.+?)</h4>\s*<p>(.+?)</p>\s+<h4>(.+?)</h4>\s*<p>(.+?)</p>$%sim', $book->author, $regs);
-//            $data=[
-//                'author'=>$regs[1],
-//                'author_intr'=>$regs[2],
-//                'translator'=>$regs[3],
-//                'translator_intr'=>$regs[4],
-//            ];
-//            $book->addAuthor($data);
+//        $only = [
+//            'index','name','url','story','list_id'=>'等级','douban_id'=>'豆瓣ID','baiduyun'=>'百度云'
+//        ];
+//        $lables = array_values($only);
+//        $keys = array_keys($only);
+//
+//        foreach($keys as $index=>$value){
+//            if(is_int($value)) $keys[$index] = $lables[$index];
 //        }
-//        foreach (Books::find() as $book){
-//            echo $book->teachplan_url().'<br>';
-//        }
+//        var_dump($lables,$keys);
+//
+//        var_dump(in_array('douban_id',$only));
+//        var_dump(array_key_exists('douban_id',$only));
 //        dd();
-//        \core\myFactory::define(Chapters::class,function(){
-//            $faker = \Faker\Factory::create();
-//            return [
-//                'index'=>$faker->numberBetween(1,50),
-//                'name'=>$faker->name,
-//                'book_id'=>$faker->numberBetween(1,63),
-//            ];
-//        });
-//        dd(factory(Chapters::class)->create([],2));
+
         $this->view->lists = Lists::find();
     }
     protected function getListAndBookFromWeb()

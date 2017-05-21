@@ -44,10 +44,10 @@ class myForm extends Form
 //        dd($metaDataTypes);
         foreach ($metaDataTypes as $column => $dataType) {
             if(count($this->only)){
-                if(in_array($column, $this->only)){
+                if(in_array($column, $this->getFieldNames('only'))){
                     $fields[] = $this->addElement($column,$dataType);
                 }
-            }elseif(!in_array($column, $this->exludedFields)) {
+            }elseif(!in_array($column, $this->getFieldNames('exludedFields'))) {
                 $fields[] = $this->addElement($column,$dataType);
             };
         }
@@ -61,15 +61,26 @@ class myForm extends Form
         }
     }
 
-    private function addElement($column, $dataType)
+    public function addElement($column, $dataType=0)
     {
+
+        $element = new Text($column);
+
         $this->add(new Text($column));
-        if ($dataType == 1) $this->add(new Date($column));
-        if ($dataType == 6) $this->add(new TextArea($column,['rows'=>6]));
+        if ($dataType == 1) $element = new Date($column);
+        if ($dataType == 6) $element = new TextArea($column,['rows'=>6]);
 
-
+        $this->add($element);
         return $column;
     }
+    public function add(\Phalcon\Forms\ElementInterface $element, $position = null, $type = null)
+    {
+        $label = $this->getElementLableFor($element);
+        $element->setLabel($label);
+
+        return parent::add($element);
+    }
+
 
     protected function addStatusSelect()
     {
@@ -79,4 +90,36 @@ class myForm extends Form
         ]));
         $this->fields[] = 'status';
     }
+    public function getLableNames($name = 'only')
+    {
+        if($name == 'only') return array_values($this->only);
+        return array_values($this->exludedFields);
+    }
+    public function getFieldNames($name = 'only')
+    {
+        $data = $this->exludedFields;
+        if($name == 'only') {
+            $data = $this->only;
+        }
+        $labels = $this->getLableNames($name);
+        $keys = array_keys($data);
+        foreach($keys as $index=>$value){
+            if(is_int($value)) $keys[$index] = $labels[$index];
+        }
+        return $keys;
+    }
+
+    private function getElementLableFor(\Phalcon\Forms\ElementInterface $element)
+    {
+        $arrayFields = 'exludedFields';
+        if(count($this->only)){
+            $arrayFields = 'only';
+        }
+        $data = $this->getFieldNames('exludedFields');
+        if($arrayFields == 'only') $data = $this->getFieldNames('only');
+        $index = array_search($element->getName(),$data);
+        return $this->getLableNames($arrayFields)[$index];
+    }
+
+
 }

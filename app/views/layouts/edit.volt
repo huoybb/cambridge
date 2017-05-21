@@ -2,9 +2,10 @@
     <p>{{ flash.output() }}</p>
     {{ form("method": "post") }}
     {% include "layouts/csrf.volt" %}
-    {% for item in Owner.getForm().fields %}
+    {% set myform = Owner.getForm() %}
+    {% for item in myform.fields %}
         <div class="form-group">
-            {{ item }}:{{ Owner.getForm().render(item,['class':'form-control']) }}<br/>
+            {{ myform.get(item).getLabel() }}:{{ myform.render(item,['class':'form-control']) }}<br/>
         </div>
     {% endfor %}
     <div class="form-group">

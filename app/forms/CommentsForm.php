@@ -8,7 +8,7 @@
  */
 class CommentsForm extends \core\myForm
 {
-    protected $only = ['content'];
+    protected $only = ['content'=>'内容'];
     public $rules = [
         'content'=>['required'=>'评论不能为空，请重新填写评论']
     ];

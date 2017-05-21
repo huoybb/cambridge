@@ -9,7 +9,7 @@
 class BooksForm extends \core\myForm
 {
     protected $only = [
-        'index','name','url','story','list_id','douban_id','baiduyun'
+        'index'=>'序号','name'=>'书名','url','story'=>'故事简介','list_id'=>'等级','douban_id'=>'豆瓣ID','baiduyun'=>'百度云'
     ];
     public $rules = [
         'name'=>'required',
@@ -22,10 +22,11 @@ class BooksForm extends \core\myForm
     public function __construct(Books $book = null)
     {
         parent::__construct($book);
-        $this->add(new \Phalcon\Forms\Element\Select('list_id',Lists::find(),[
+        $element = new \Phalcon\Forms\Element\Select('list_id',Lists::find(),[
             'using'=>['id','name'],
             'class'=>'form-control',
-        ]));
+        ]);
+        $this->add($element);
     }
 
 }
