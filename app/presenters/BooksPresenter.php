@@ -75,14 +75,14 @@ class BooksPresenter extends \core\myPresenter
     {
         $file = "/files/answers/{$this->pdf()}";
         if(is_dir(BASE_PATH."/public".$file)) {
-            $file = $this->getResource('练习答案');
+            $file = $this->entity->getResource('练习答案');
             if(!$file) return null;
         }
         return $this->createLink($file,'练习答案');
     }
     public function answerfile()
     {
-        if(!$this->pdf()) return str_replace('/','\\',$this->getResource('练习答案'));
+        if(!$this->pdf()) return str_replace('/','\\',$this->entity->getResource('练习答案'));
         return "files\answers\\{$this->pdf()}";
     }
 
@@ -90,14 +90,14 @@ class BooksPresenter extends \core\myPresenter
     {
         $file = "/files/teachplans/{$this->pdf()}";
         if(is_dir(BASE_PATH."/public".$file)){
-            $file = $this->getResource('教师教案');
+            $file = $this->entity->getResource('教师教案');
             if(!$file) return null;
         }
         return $this->createLink($file,'教师教案');
     }
     public function teachplanfile()
     {
-        if(!$this->pdf()) return str_replace('/','\\',$this->getResource('教师教案'));
+        if(!$this->pdf()) return str_replace('/','\\',$this->entity->getResource('教师教案'));
         return "files\\teachplans\\{$this->pdf()}";
     }
 
@@ -126,18 +126,4 @@ class BooksPresenter extends \core\myPresenter
         $info =  preg_replace('/所在丛书：<br>/','所在丛书：',$info);
         return $info;
     }
-
-    private function getResource($keywords)
-    {
-        if(is_dir($this->entity->resourceRealPath())){
-            $files = scandir($this->entity->resourceRealPath());
-            foreach($files as $filename){
-                if (preg_match('/^.*'.$keywords.'.pdf\Z/im', $filename)) {
-                    return $this->entity->rescourcePath().$filename;
-                }
-            }
-        }
-        return null;
-    }
-
 }

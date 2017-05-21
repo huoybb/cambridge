@@ -316,6 +316,19 @@ class Books extends \core\myModel
         return BASE_PATH.'/public'.$relativePath;
     }
 
+    public function getResource($keywords)
+    {
+        if(is_dir($this->resourceRealPath())){
+            $files = scandir($this->resourceRealPath());
+            foreach($files as $filename){
+                if (preg_match('/^.*'.$keywords.'.pdf\Z/im', $filename)) {
+                    return $this->rescourcePath().$filename;
+                }
+            }
+        }
+        return null;
+    }
+
     public function blcup()
     {
         return "http://www.blcup.com/PList?_content={$this->name_zh()}";
