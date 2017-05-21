@@ -23,12 +23,14 @@
             <td>#</td>
             <td>名字</td>
             <td>链接</td>
+            <td>百度云</td>
         </tr>
         {% for book in list.books() %}
             <tr>
                 <td>{{ book.id }}</td>
                 <td><a href="{{ url(['for':'books.show','book':book.id]) }}">{{ book.name }}</a></td>
-                <td>{{ book.url }}</td>
+                <td><a href="{{ book.url }}" target="_blank">{{ book.url }}</a></td>
+                <td><a href="{{ book.baiduyun }}" target="_blank">{{ book.baiduyun }}</a></td>
             </tr>
         {% endfor %}
     </table>
