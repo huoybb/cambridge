@@ -37,6 +37,17 @@ class myForm extends Form
         }
     }
 
+    public function add(\Phalcon\Forms\ElementInterface $element, $position = null, $type = null)
+    {
+        $label = $this->getElementLableFor($element);
+        $element->setLabel($label);
+
+        return parent::add($element);
+    }
+
+
+    //** 下面这些函数都是内部使用的，不对外开发 */
+
     protected function initialize(myModel $model)
     {
         $fields = [];
@@ -44,10 +55,10 @@ class myForm extends Form
 //        dd($metaDataTypes);
         foreach ($metaDataTypes as $column => $dataType) {
             if(count($this->only)){
-                if(in_array($column, $this->getFieldNames('only'))){
+                if(in_array($column, $this->getFieldNames())){
                     $fields[] = $this->addElement($column,$dataType);
                 }
-            }elseif(!in_array($column, $this->getFieldNames('exludedFields'))) {
+            }elseif(!in_array($column, $this->exludedFields)) {
                 $fields[] = $this->addElement($column,$dataType);
             };
         }
@@ -61,65 +72,42 @@ class myForm extends Form
         }
     }
 
-    public function addElement($column, $dataType=0)
+    protected function addElement($column, $dataType=0)
     {
 
         $element = new Text($column);
 
-        $this->add(new Text($column));
         if ($dataType == 1) $element = new Date($column);
         if ($dataType == 6) $element = new TextArea($column,['rows'=>6]);
 
         $this->add($element);
         return $column;
     }
-    public function add(\Phalcon\Forms\ElementInterface $element, $position = null, $type = null)
-    {
-        $label = $this->getElementLableFor($element);
-        $element->setLabel($label);
-
-        return parent::add($element);
-    }
 
 
-    protected function addStatusSelect()
+
+    // 下面三个是为only这个数组准备的函数，一个是获取标签的数组，一个是定义的数据数据域的数组，还有就是根据数据域返回相应的标签
+    protected function getLabelNames()
     {
-        $this->add(new \Phalcon\Forms\Element\Select('status', ['open' => 'open', 'closed' => 'closed'], [
-            'class' => 'form-control',
-            'default' => 'open'
-        ]));
-        $this->fields[] = 'status';
+        if(count($this->only)) return array_values($this->only);
+        return [];
     }
-    public function getLableNames($name = 'only')
+    protected function getFieldNames()
     {
-        if($name == 'only') return array_values($this->only);
-        return array_values($this->exludedFields);
-    }
-    public function getFieldNames($name = 'only')
-    {
-        $data = $this->exludedFields;
-        if($name == 'only') {
-            $data = $this->only;
-        }
-        $labels = $this->getLableNames($name);
-        $keys = array_keys($data);
+        $labels = $this->getLabelNames();
+        if(0 == count($labels)) return [];
+
+        $keys = array_keys($this->only);
         foreach($keys as $index=>$value){
             if(is_int($value)) $keys[$index] = $labels[$index];
         }
         return $keys;
     }
-
-    private function getElementLableFor(\Phalcon\Forms\ElementInterface $element)
+    protected function getElementLableFor(\Phalcon\Forms\ElementInterface $element)
     {
-        $arrayFields = 'exludedFields';
-        if(count($this->only)){
-            $arrayFields = 'only';
-        }
-        $data = $this->getFieldNames('exludedFields');
-        if($arrayFields == 'only') $data = $this->getFieldNames('only');
+        $data = $this->getFieldNames();
+        if(0==count($data)) return $element->getName();
         $index = array_search($element->getName(),$data);
-        return $this->getLableNames($arrayFields)[$index];
+        return $this->getLabelNames()[$index];
     }
-
-
 }
