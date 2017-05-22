@@ -22,11 +22,10 @@ class BooksForm extends \core\myForm
     public function __construct(Books $book = null)
     {
         parent::__construct($book);
-        $element = new \Phalcon\Forms\Element\Select('list_id',Lists::find(),[
+        $this->add(new \Phalcon\Forms\Element\Select('list_id',Lists::find(),[
             'using'=>['id','name'],
             'class'=>'form-control',
-        ]);
-        $this->add($element);
+        ]));
     }
 
 }
